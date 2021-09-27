@@ -1,0 +1,60 @@
+<div class="product-template-container">
+    <h4 class="product-title">Create a new Product Template</h4>
+    <form name="form"
+          [formGroup]="productTemplateGroup">
+        <div gdColumns.gt-sm="20% 20%"
+             gdGap="3rem"
+             gdRows>
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <input type="text"
+                       matInput
+                       name="description"
+                       formControlName="description">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Product Type</mat-label>
+                <mat-select formControlName="product"
+                            (selectionChange)="selectProductType($event)">
+                    <mat-option *ngFor="let type of productTypeValues"
+                                [value]="type?.id">
+                        {{type?.description}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div gdColumns.gt-sm="20% 20%"
+             gdGap="3rem"
+             gdRows>
+            <mat-form-field>
+                <mat-label>Attributes</mat-label>
+                <mat-select formControlName="product"
+                            (selectionChange)="selectAttribute($event)">
+                    <mat-option *ngFor="let attribute of attributeGroup"
+                                [value]="attribute?.id">
+                        {{attribute?.description}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="add-new"
+                 (click)="addNewAttribute()">+ Add New</div>
+        </div>
+        <div gdColumns="repeat(4, 10%)"
+             gdGap="12px"
+             *ngIf="selectedAttribute?.length"
+             class="attribute-values">
+            <mat-checkbox *ngFor="let attributeGroup of selectedAttribute"
+                          color="primary"
+                          [checked]="attributeGroup?.required === true ? true : null"
+                          [disabled]="attributeGroup?.required === true ? true : null">
+                {{attributeGroup?.description}}
+            </mat-checkbox>
+        </div>
+    </form>
+    <process-table [processList]="processList"
+                   [headers]="headers"></process-table>
+    <div class="save-button-container"
+         gdAlignRows="end">
+        <div class="save-btn">Save</div>
+    </div>
+</div>

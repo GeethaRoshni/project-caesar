@@ -1,0 +1,122 @@
+<div>
+    <div class="process-selection"
+         gdColumns="20%"
+         gdAlignRows="end">
+        <mat-form-field>
+            <mat-label>Process</mat-label>
+            <mat-select (selectionChange)="selectProcess($event)">
+                <mat-option value="new">
+                    Create new Process
+                </mat-option>
+                <mat-option *ngFor="let process of processList"
+                            [value]="process?.id">
+                    {{process?.description}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="process-table">
+        <div gdColumns="12% 20% 16% 29% 16%"
+             class="table-header align-items-center">
+            <div>Process Number {{processNumber}}</div>
+            <div>
+                <div class="form-group d-flex input-gap align-items-center">
+                    <div>Name: </div>
+                    <mat-form-field>
+                        <input type="text"
+                               matInput
+                               [(ngModel)]="processName"
+                               name="name">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div>
+                Total Cost: ${{headerTotalCost}}
+            </div>
+            <div>
+                <div class="form-group d-flex input-gap align-items-center">
+                    <div>Product of the Process</div>
+                    <mat-form-field>
+                        <input type="text"
+                               matInput
+                               [(ngModel)]="productName"
+                               name="productname">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="add-new-product"
+                 (click)="addNewProduct()">+ Add new Product</div>
+        </div>
+        <div class="mx-ac-datatable-container">
+            <mat-table [dataSource]="dataSource">
+                <ng-container *ngFor="let col of headers; let i= index"
+                              [matColumnDef]="col.prop">
+                    <mat-header-cell *matHeaderCellDef
+                                     class="mx-ac-tableheader">
+                        {{headers[i].name}}
+                    </mat-header-cell>
+
+                    <mat-cell *matCellDef="let row; let rowIndex = index">
+                        <ng-container *ngIf="col.type === 'menu'">
+                            <div class="tbl-edit">
+                                <mat-icon class="edit-icon"
+                                          (click)="editRecord(rowIndex, row)">edit</mat-icon>
+                            </div>
+                            <div class="tbl-del">
+                                <mat-icon class="delete-icon"
+                                          (click)="deleteRecord(rowIndex, row)">delete</mat-icon>
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="!col.type">
+                            <div class="mx-responsive-cell"
+                                 [attr.data-label]="col.name">
+                                {{row[col.prop] ? (row[col.prop] ): '-' }}
+                            </div>
+                        </ng-container>
+                    </mat-cell>
+
+                    <mat-footer-cell *matFooterCellDef>{{(col.isFooter ? getTotalValue(col) : '')}}</mat-footer-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                <mat-footer-row class="table-footer"
+                                [style.display]="showFooter ? '' : 'none'"
+                                *matFooterRowDef="displayedColumns"></mat-footer-row>
+            </mat-table>
+        </div>
+        <div *ngIf="!tableData || tableData?.length===0"
+             class="mx-no-data-found">
+            <mat-icon class="mat-search-item-icon">folder_open</mat-icon>
+            <span class="mx-p-b-10">
+                No records found
+            </span>
+        </div>
+        <div class="cost-container">
+            <div class="cost-heading cost-border"
+                 gdColumns="50% 50%">
+                <div class="cost-title">CONVERSION COST CALCULATION</div>
+                <div class="cost-add-new"
+                     (click)="addNewCost()">+ Add new</div>
+            </div>
+            <div class="cost-data cost-border"
+                 gdColumns="70% 10% 20%"
+                 *ngFor="let cost of conversionCost; let i = index">
+                <div>{{cost.description}}</div>
+                <input type="text"
+                       class="cost-input"
+                       matInput
+                       name="costAmt"
+                       [value]="cost.amount"
+                       (blur)="updateTotalCost(i, $event)">
+                <mat-icon class="cost-delete"
+                          (click)="deleteCost(i)">delete</mat-icon>
+            </div>
+            <div class="cost-data total-cost-container"
+                 gdColumns="67% 10%">
+                <div>Total</div>
+                <div class="cost-total">{{totalCostAmount}}$</div>
+            </div>
+        </div>
+    </div>
+</div>

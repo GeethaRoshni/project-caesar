@@ -1,0 +1,121 @@
+.process-selection {
+    margin-left: auto;
+    margin-bottom: 25px;
+    color: #4e5358;
+    font-size: 14px;
+}
+
+.process-table {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.table-header {
+    gap: 20px;
+    padding-left: 21px;
+    color: rgba(0, 0, 0, 0.87);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.input-gap {
+    gap: 20px;
+}
+
+.add-new-product {
+    font-size: 12px;
+    color: #1ca4d4;
+    font-weight: 500;
+    margin-left: auto;
+    padding-right: 15px;
+    cursor: pointer;
+}
+
+mat-header-row {
+    background: #e7f3f8;
+    font-weight: bold;
+}
+
+.edit-icon {
+    margin-right: 10px;
+    color: #1565c0;
+    cursor: pointer;
+}
+
+.delete-icon {
+    color: #f44336;
+    cursor: pointer;
+}
+
+.tbl-edit {
+    padding-left: 85px;
+}
+
+.tbl-del {
+    padding-left: 12px;
+}
+
+.table-footer {
+    font-weight: 500;
+    background: #e7f3f8;
+}
+
+.mx-no-data-found {
+    text-align: center;
+    padding: 20px 0;
+    mat-icon {
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+.cost-title {
+    margin-left: 25px;
+}
+
+.cost-add-new {
+    justify-self: end;
+    margin-right: 60px;
+    cursor: pointer;
+}
+
+.cost-data {
+    padding-left: 45px;
+    align-items: center;
+}
+
+.cost-delete {
+    cursor: pointer;
+    justify-self: end;
+    margin-right: 30px;
+    color: #f44336;
+}
+
+.cost-total {
+    justify-self: center;
+}
+
+.cost-container {
+    background: #dcecf4;
+}
+
+.cost-heading {
+    font-weight: 500;
+}
+
+.cost-border {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.total-cost-container {
+    background: #80c4dc;
+    color: #fff;
+    font-weight: 500;
+    padding: 10px 0 10px 45px;
+}
+
+.cost-input {
+    border-bottom: 1px solid;
+    width: 55px;
+    text-align: center;
+}
